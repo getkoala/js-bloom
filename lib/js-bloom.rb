@@ -40,6 +40,18 @@ class JsBloom
     true
   end
 
+  def add_single key
+    indexes_for(key).each { |index| @bits.add(index) }
+    nil
+  end
+
+  def test_single key
+    indexes_for(key).each do |index|
+      return false if @bits.get(index) == 0
+    end
+    true
+  end
+
   def clear
     @bits = BitArray.new(@options["size"])
   end
