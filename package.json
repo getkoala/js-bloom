@@ -1,10 +1,9 @@
 {
-  "name": "json-bloomfilter",
+  "name": "js-bloom",
   "version": "0.1.0",
   "main": "javascript/index.js",
   "repository": "git@github.com:cbetta/json-bloomfilter.git",
-  "author": "Netto Farah <nettofarah@gmail.com>",
-  "license": "MIT",
+  "author": "Netto Farah <netto@koala.live>",
   "private": true,
   "devDependencies": {
     "@types/jest": "^27.0.3",
