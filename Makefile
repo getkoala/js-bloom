@@ -13,5 +13,5 @@ build:
 .PHONY: prod.min.js
 
 bench:
-	bundle exec ruby ./benchmark/bench.rb
+	@bundle exec ruby ./benchmark/bench.rb
 .PHONY: bench
