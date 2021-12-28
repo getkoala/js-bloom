@@ -1,4 +1,4 @@
-class JsonBloomfilter
+class JsBloom
   class BitArray
     attr_reader :size
     attr_reader :field

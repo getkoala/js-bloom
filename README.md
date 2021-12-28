@@ -15,13 +15,13 @@ All of this while not sending the entire list to the client, which is something 
 ### Ruby
 
 ```ruby
-require "json-bloomfilter"
+require "js-bloom"
 
 # use the factory to configure the filter
-filter =  JsonBloomFilter.build 10000, 0.01 # number of expected items, desired error rate
+filter =  JsBloom.build 10000, 0.01 # number of expected items, desired error rate
 
 # or create a define the BloomFilter manually
-filter = JsonBloomFilter.new size: 100
+filter = JsBloom.new size: 100
 
 # and add entries
 filter.add "foo"
@@ -38,7 +38,7 @@ filter.to_json #=> hash as JSON
 config = filter.to_hash #=> { "size" => 100, "hashes" => 4, "seed" => 1234567890, "bits" => [...] }
 
 # use the hash to generate a new filter with the same config
-filter2 = JsonBloomFilter.new config
+filter2 = JsBloom.new config
 filter2.test "foo" #=> true
 filter2.test "bar" #=> true
 filter2.test "doh" #=> probably false
@@ -47,13 +47,13 @@ filter2.test "doh" #=> probably false
 ### Javascript
 
 ```javascript
-import { JsonBloomFilter } from "json-bloom-filter";
+import { JsBloom } from "js-bloom";
 
 // use the factory to configure the filter
-let filter = JsonBloomFilter.build(10000, 0.01); // number of expected items, desired error rate
+let filter = JsBloom.build(10000, 0.01); // number of expected items, desired error rate
 
 // or create a define the filter manually
-let filter = new JsonBloomFilter({ size: 100 });
+let filter = new JsBloom({ size: 100 });
 
 // and add entries
 filter.add("foo");
@@ -70,7 +70,7 @@ filter.toJson(); //=> hash as JSON
 config = filter.toHash(); //=> { "size" => 100, "hashes" => 4, "seed" => 1234567890, "bits" => [...] }
 
 // use the hash to generate a new BloomFilter with the same config
-filter2 = new JsonBloomFilter(config);
+filter2 = new JsBloom(config);
 filter2.test("foo"); //=> true
 filter2.test("bar"); //=> true
 filter2.test("doh"); //=> probably false

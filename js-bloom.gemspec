@@ -1,10 +1,10 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "json-bloomfilter/version"
+require "js-bloom/version"
 
 Gem::Specification.new do |s|
   s.name        = "js-bloom"
-  s.version     = JsonBloomfilter::VERSION
+  s.version     = JsBloom::VERSION
   s.authors     = ["Netto Farah"]
   s.email       = ["netto@koala.live"]
   s.homepage    = "http://github.com/koala-live/js-bloom"

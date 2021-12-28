@@ -1,24 +1,24 @@
-import { JSBloom as JsonBloomfilter } from "../../js/index";
+import { JSBloom as JsBloom } from "../../js/index";
 
-describe("JsonBloomfilter", function () {
+describe("JsBloom", function () {
   describe("#initialize", function () {
     it("should take the appropriate options", function () {
       const seed = new Date().getTime() / 1000 - 24 * 60 * 60;
-      const bf = new JsonBloomfilter({ size: 200, hashes: 10, seed: seed });
+      const bf = new JsBloom({ size: 200, hashes: 10, seed: seed });
       expect(bf.toHash()["size"]).toBe(200);
       expect(bf.toHash()["hashes"]).toBe(10);
       expect(bf.toHash()["seed"]).toBe(seed);
     });
 
     it("should be initializable with a field serialized by another bloom filter", function () {
-      const bf1 = new JsonBloomfilter();
+      const bf1 = new JsBloom();
       bf1.add("foo");
-      const bf2 = new JsonBloomfilter(bf1.toHash());
+      const bf2 = new JsBloom(bf1.toHash());
       expect(bf2.test("foo")).toBe(true);
     });
 
     it("should initialize the field with the right size", function () {
-      const bf = new JsonBloomfilter({ size: 100 });
+      const bf = new JsBloom({ size: 100 });
       expect(bf.toHash()["bits"].length).toBe(4);
     });
   });
@@ -27,7 +27,7 @@ describe("JsonBloomfilter", function () {
     let bf;
 
     beforeEach(function () {
-      bf = new JsonBloomfilter();
+      bf = new JsBloom();
       bf.add("foobar");
     });
 
