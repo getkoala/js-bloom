@@ -3,7 +3,7 @@ require 'csv'
 
 describe "Integration" do
   it "should serialize a filter to be used in JS" do
-    bloom = JsBloom.build(100, 0.001)
+    bloom = JsBloom.build(1000, 0.001)
 
     bloom.add 'matt'
     bloom.add 'netto'
@@ -23,7 +23,7 @@ describe "Integration" do
       JSON.parse(row[0])
     end
 
-    bloom = JsBloom.build(companies.size * 10, 0.001)
+    bloom = JsBloom.build(companies.size * 20, 0.001)
 
     companies.each do |company|
       bloom.add(company['name'])
@@ -45,7 +45,7 @@ describe "Integration" do
     config = bloom.to_json
     gzipped = Zlib::Deflate.deflate(config)
 
-    expect(config.bytesize).to be <= 26_000
-    expect(gzipped.bytesize).to be <= 8_000
+    expect(config.bytesize).to be <= 38_000
+    expect(gzipped.bytesize).to be <= 10_000
   end
 end
