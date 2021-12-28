@@ -8,17 +8,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
+      - uses: actions/setup-node@v2
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.0.1
           bundler-cache: true
-      - name: Run tests
-        run: bundle exec rake test
 
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v2
-        with:
-          node-version: "16"
-          cache: "yarn"
       - run: yarn install
-      - run: yarn test
+      - run: make test
