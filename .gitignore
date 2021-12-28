@@ -2,3 +2,5 @@ Gemfile.lock
 pkg
 /node_modules/
 .DS_Store
+
+./spec/fixtures/*.json
