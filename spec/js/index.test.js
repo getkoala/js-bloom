@@ -1,26 +1,6 @@
-import { JsonBloomfilter } from "../../js/index";
+import { JSBloom as JsonBloomfilter } from "../../js/index";
 
 describe("JsonBloomfilter", function () {
-  describe(".build", function () {
-    it("should generate a BloomFilter with the right number of hashes and size", function () {
-      const bf = JsonBloomfilter.build(1000, 0.01);
-      expect(bf.toHash()["hashes"]).toBe(7);
-      expect(bf.toHash()["size"]).toBe(9586);
-    });
-
-    it("should optionally take an array of strings instead of a capacity", function () {
-      const bf = JsonBloomfilter.build(["foo", "bar"], 0.01);
-      expect(bf.toHash()["hashes"]).toBe(7);
-      expect(bf.toHash()["size"]).toBe(20);
-    });
-
-    it("should require a positive integer capacity", function () {
-      expect(function () {
-        new JsonBloomfilter.build(0, 0.01);
-      }).toThrow("Capacity needs to be a positive integer");
-    });
-  });
-
   describe("#initialize", function () {
     it("should take the appropriate options", function () {
       const seed = new Date().getTime() / 1000 - 24 * 60 * 60;
@@ -70,18 +50,6 @@ describe("JsonBloomfilter", function () {
         const bits = bf.toHash()["bits"];
         bf.add("foobar");
         expect(bf.test("foobar")).toBe(true);
-      });
-    });
-
-    describe("#clear", function () {
-      it("should clear the bit array", function () {
-        expect(bf.bits.toString()).not.toBe(
-          "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
-        );
-        bf.clear();
-        expect(bf.bits.toString()).toBe(
-          "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
-        );
       });
     });
 

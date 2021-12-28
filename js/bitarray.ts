@@ -1,4 +1,4 @@
-export function BitArray(size, field = null) {
+export function BA(size: number, field = null) {
   if (!size) {
     throw new Error("Missing argument: size");
   }
@@ -21,15 +21,15 @@ export function BitArray(size, field = null) {
   return this;
 }
 
-BitArray.prototype.add = function (position) {
+BA.prototype.add = function (position) {
   return this.set(position, 1);
 };
 
-BitArray.prototype.remove = function (position) {
+BA.prototype.remove = function (position) {
   return this.set(position, 0);
 };
 
-BitArray.prototype.set = function (position, value) {
+BA.prototype.set = function (position, value) {
   if (position >= this.size) {
     throw new Error("BitArray index out of bounds");
   }
@@ -43,7 +43,7 @@ BitArray.prototype.set = function (position, value) {
   return true;
 };
 
-BitArray.prototype.get = function (position) {
+BA.prototype.get = function (position) {
   if (position >= this.size) {
     throw new Error("BitArray index out of bounds");
   }
@@ -56,22 +56,22 @@ BitArray.prototype.get = function (position) {
   }
 };
 
-BitArray.prototype.arrayPosition = function (position) {
+BA.prototype.arrayPosition = function (position) {
   return Math.floor(position / this.ELEMENT_WIDTH);
 };
 
-BitArray.prototype.bitChange = function (position) {
+BA.prototype.bitChange = function (position) {
   return this.abs(1 << position % this.ELEMENT_WIDTH);
 };
 
-BitArray.prototype.abs = function (val) {
+BA.prototype.abs = function (val) {
   if (val < 0) {
     val += 4294967295;
   }
   return val;
 };
 
-BitArray.prototype.toString = function () {
+BA.prototype.toString = function () {
   let output = "";
   for (
     let i = 0, end = this.size - 1, asc = 0 <= end;

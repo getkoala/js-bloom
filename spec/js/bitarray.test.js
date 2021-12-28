@@ -1,4 +1,4 @@
-import { BitArray } from "../../js/bitarray";
+import { BA as BitArray } from "../../js/bitarray";
 
 describe("BitArray", function () {
   describe("#initialize", function () {

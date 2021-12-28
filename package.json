@@ -1,12 +1,14 @@
 {
   "name": "js-bloom",
   "version": "0.1.0",
-  "main": "javascript/index.js",
+  "main": "min.js",
+  "module": "min.js",
   "repository": "git@github.com:cbetta/json-bloomfilter.git",
   "author": "Netto Farah <netto@koala.live>",
   "private": true,
   "devDependencies": {
     "@types/jest": "^27.0.3",
+    "esbuild": "^0.14.8",
     "jest": "^27.4.5",
     "prettier": "^2.5.1",
     "ts-jest": "^27.1.2",
