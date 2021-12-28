@@ -4,8 +4,8 @@ install:
 .PHONY: install
 
 test:
-	yarn test
 	bundle exec rake test
+	yarn test
 .PHONY: test
 
 build:
