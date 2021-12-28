@@ -3,7 +3,7 @@ require 'csv'
 
 describe "Integration" do
   it "should serialize a filter to be used in JS" do
-    bloom = JsBloom.new
+    bloom = JsBloom.build(100, 0.001)
 
     bloom.add 'matt'
     bloom.add 'netto'
