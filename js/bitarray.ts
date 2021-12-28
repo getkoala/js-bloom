@@ -33,12 +33,12 @@ BA.prototype.set = function (position, value) {
   if (position >= this.size) {
     throw new Error("BitArray index out of bounds");
   }
-  const aPos = this.arrayPosition(position);
-  const bChange = this.bitChange(position);
+  const aPos = arrayPosition(position, this.ELEMENT_WIDTH);
+  const bChange = bitChange(position, this.ELEMENT_WIDTH);
   if (value === 1) {
-    this.field[aPos] = this.abs(this.field[aPos] | bChange);
+    this.field[aPos] = abs(this.field[aPos] | bChange);
   } else if ((this.field[aPos] & bChange) !== 0) {
-    this.field[aPos] = this.abs(this.field[aPos] ^ bChange);
+    this.field[aPos] = abs(this.field[aPos] ^ bChange);
   }
   return true;
 };
@@ -47,38 +47,26 @@ BA.prototype.get = function (position) {
   if (position >= this.size) {
     throw new Error("BitArray index out of bounds");
   }
-  const aPos = this.arrayPosition(position);
-  const bChange = this.bitChange(position);
-  if (this.abs(this.field[aPos] & bChange) > 0) {
+  const aPos = arrayPosition(position, this.ELEMENT_WIDTH);
+  const bChange = bitChange(position, this.ELEMENT_WIDTH);
+  if (abs(this.field[aPos] & bChange) > 0) {
     return 1;
   } else {
     return 0;
   }
 };
 
-BA.prototype.arrayPosition = function (position) {
-  return Math.floor(position / this.ELEMENT_WIDTH);
-};
+function arrayPosition(position, ELEMENT_WIDTH) {
+  return Math.floor(position / ELEMENT_WIDTH);
+}
 
-BA.prototype.bitChange = function (position) {
-  return this.abs(1 << position % this.ELEMENT_WIDTH);
-};
+function bitChange(position, ELEMENT_WIDTH) {
+  return abs(1 << position % ELEMENT_WIDTH);
+}
 
-BA.prototype.abs = function (val) {
+function abs(val) {
   if (val < 0) {
     val += 4294967295;
   }
   return val;
-};
-
-BA.prototype.toString = function () {
-  let output = "";
-  for (
-    let i = 0, end = this.size - 1, asc = 0 <= end;
-    asc ? i <= end : i >= end;
-    asc ? i++ : i--
-  ) {
-    output += this.get(i);
-  }
-  return output;
-};
+}

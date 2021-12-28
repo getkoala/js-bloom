@@ -1,5 +1,17 @@
 import { BA as BitArray } from "../../js/bitarray";
 
+BitArray.prototype.toString = function () {
+  let output = "";
+  for (
+    let i = 0, end = this.size - 1, asc = 0 <= end;
+    asc ? i <= end : i >= end;
+    asc ? i++ : i--
+  ) {
+    output += this.get(i);
+  }
+  return output;
+};
+
 describe("BitArray", function () {
   describe("#initialize", function () {
     it("should require a size", function () {
