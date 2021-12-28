@@ -1,7 +1,6 @@
 require "spec_helper"
 
 describe JsonBloomfilter do
-
   describe ".build" do
     it "should generate a BloomFilter with the right number of hashes and size" do
       bf = JsonBloomfilter.build 1000, 0.01
@@ -33,7 +32,7 @@ describe JsonBloomfilter do
       bf1 = JsonBloomfilter.new
       bf1.add "foo"
       bf2 = JsonBloomfilter.new bf1.to_hash
-      expect(bf2.test "foo").to be_true
+      expect(bf2.test "foo").to be true
     end
   end
 
@@ -45,23 +44,23 @@ describe JsonBloomfilter do
 
     describe "#add, #test" do
       it "should add a key" do
-        expect(@bf.test "foo").to be_false
+        expect(@bf.test "foo").to be false
         @bf.add "foo"
-        expect(@bf.test "foo").to be_true
+        expect(@bf.test "foo").to be true
       end
 
       it "should be able to add and test more than one key at a time" do
-        expect(@bf.test "foo").to be_false
-        expect(@bf.test "bar").to be_false
+        expect(@bf.test "foo").to be false
+        expect(@bf.test "bar").to be false
         @bf.add ["foo", "bar"]
-        expect(@bf.test ["foo", "bar"]).to be_true
+        expect(@bf.test ["foo", "bar"]).to be true
       end
 
       it "should not change anything if added twice" do
-        expect(@bf.test "foobar").to be_true
+        expect(@bf.test "foobar").to be true
         bits = @bf.to_hash["bits"]
         @bf.add "foobar"
-        expect(@bf.test "foobar").to be_true
+        expect(@bf.test "foobar").to be true
         expect(@bf.to_hash["bits"]).to be == bits
       end
     end
@@ -98,6 +97,5 @@ describe JsonBloomfilter do
         expect(@bf.to_json).to be == JSON.generate(@bf.to_hash)
       end
     end
-
   end
 end

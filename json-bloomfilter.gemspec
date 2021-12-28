@@ -18,14 +18,6 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  s.add_dependency 'json'
-
   s.add_development_dependency 'rake'
   s.add_development_dependency 'rspec'
-  s.add_development_dependency 'yui-compressor'
-  s.add_development_dependency 'therubyracer'
-  s.add_development_dependency 'coffee-script'
-  s.add_development_dependency 'fssm'
-  s.add_development_dependency 'rb-fsevent'
-  s.add_development_dependency 'jasmine'
 end

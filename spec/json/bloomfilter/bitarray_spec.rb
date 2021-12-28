@@ -1,11 +1,13 @@
 require "spec_helper"
 
+RSpec::Expectations.configuration.on_potential_false_positives = :nothing
+
 describe JsonBloomfilter::BitArray do
 
   describe "#initialize" do
     it "should require a size" do
-      expect(lambda{JsonBloomfilter::BitArray.new}).to raise_error(ArgumentError)
-      expect(lambda{JsonBloomfilter::BitArray.new(100)}).not_to raise_error(ArgumentError)
+      expect {JsonBloomfilter::BitArray.new}.to raise_error(ArgumentError)
+      expect {JsonBloomfilter::BitArray.new(100)}.not_to raise_error(ArgumentError)
     end
     it "should take an optional bit field" do
       field = [0,0,0,2]
