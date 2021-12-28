@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "allowJs": true,
+    "checkJs": false
+  },
+  "exclude": ["**/*.test.js", "node_modules"],
+  "include": ["js/**/*"],
+  "compileOnSave": false
+}
