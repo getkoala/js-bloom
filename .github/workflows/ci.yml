@@ -1,10 +1,19 @@
-name: JS
+name: CI
 on: push
 
 jobs:
   verify:
-    name: JS
+    name: CI
     runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.0.1
+          bundler-cache: true
+      - name: Run tests
+        run: bundle exec rake test
 
     steps:
       - uses: actions/checkout@v1
@@ -14,3 +23,4 @@ jobs:
           cache: "yarn"
       - run: yarn install
       - run: yarn test
+
