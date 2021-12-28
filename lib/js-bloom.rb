@@ -5,10 +5,8 @@ require "zlib"
 class JsBloom
   DEFAULTS = { "size" => 100, "hashes" => 4, "seed" => Time.new.to_i, "bits" => nil }
 
-  def self.build capacity_or_items, error_rate
-    capacity, items = capacity_or_items.is_a?(Array) ? [capacity_or_items.length, capacity_or_items] : [capacity_or_items, nil]
-    raise ArgumentError.new("Capacity needs to be a positive integer") if capacity <= 0
-    JsBloom.new :size => size_for(capacity, error_rate), :hashes => hashes_for(capacity, error_rate), :items => items
+  def self.build capacity, error_rate, seed = Time.new.to_i
+    JsBloom.new :size => size_for(capacity, error_rate), :hashes => hashes_for(capacity, error_rate), :seed => seed
   end
 
   def self.size_for capacity, error_rate

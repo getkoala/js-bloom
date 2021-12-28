@@ -2,8 +2,18 @@ require "spec_helper"
 require 'csv'
 
 describe "Integration" do
+  it "simple" do
+    bloom = JsBloom.new(seed: 1)
+
+    bloom.add 'matt'
+    bloom.add 'netto'
+    bloom.add 'bruna'
+
+    File.write('./spec/fixtures/bloom-simple.json', bloom.to_json)
+  end
+
   it "should serialize a filter to be used in JS" do
-    bloom = JsBloom.build(1000, 0.001)
+    bloom = JsBloom.new(seed: 1)
 
     bloom.add 'matt'
     bloom.add 'netto'
@@ -23,7 +33,7 @@ describe "Integration" do
       JSON.parse(row[0])
     end
 
-    bloom = JsBloom.build(companies.size * 20, 0.001)
+    bloom = JsBloom.new(seed: 1, hashes: 10, size: 144_000)
 
     companies.each do |company|
       bloom.add(company['name'])
@@ -45,7 +55,7 @@ describe "Integration" do
     config = bloom.to_json
     gzipped = Zlib::Deflate.deflate(config)
 
-    expect(config.bytesize).to be <= 38_000
-    expect(gzipped.bytesize).to be <= 10_000
+    expect(config.bytesize).to be <= 25_000
+    expect(gzipped.bytesize).to be <= 8_000
   end
 end
