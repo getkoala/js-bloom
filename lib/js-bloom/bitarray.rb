@@ -9,14 +9,17 @@ class JsBloom
     def initialize(size, field = nil)
       @size = size
       @field = field || Array.new(((size - 1) / ELEMENT_WIDTH) + 1, 0)
+      @count = 0
     end
 
     def add position
       self[position] = 1
+      @count += 1
     end
 
     def remove position
       self[position] = 0
+      @count -= 1
     end
 
     # Set a bit (1/0)
@@ -38,6 +41,14 @@ class JsBloom
     # Iterate over each bit
     def each(&block)
       @size.times { |position| yield self.get(position) }
+    end
+
+    def set_bits
+      count = 0
+      each do |bit|
+        count += 1 if bit == 1
+      end
+      count
     end
 
     # Returns the field as a string like "0101010100111100," etc.

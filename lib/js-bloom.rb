@@ -49,6 +49,7 @@ class JsBloom
     indexes_for(key).each do |index|
       return false if @bits.get(index) == 0
     end
+
     true
   end
 
@@ -64,10 +65,22 @@ class JsBloom
     JSON.generate to_hash
   end
 
+  def size
+    @bits.set_bits
+  end
+
+  def stats
+    fp = ((1.0 - Math.exp(-(@options["hashes"] * size).to_f / @options["size"])) ** @options["hashes"]) * 100
+    printf "Number of filter buckets (m): %d\n" % @options["size"]
+    printf "Number of filter elements (n): %d\n" % size
+    printf "Number of filter hashes (k) : %d\n" % @options["hashes"]
+    printf "Predicted false positive rate = %.2f%\n" % fp
+  end
+
   private
 
   def indexes_for key
-    Array.new(@options["hashes"]).each_with_index.map do |item, index|
+    @options['hashes'].times.map do |index|
       Zlib.crc32("#{key}:#{index+@options["seed"]}") % @options["size"]
     end
   end
