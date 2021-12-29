@@ -1,9 +1,10 @@
 {
   "name": "js-bloom",
   "version": "0.1.0",
-  "main": "min.js",
-  "module": "min.js",
+  "main": "node.dist.js",
+  "module": "browser.min.js",
   "types": "index.d.ts",
+  "type": "module",
   "repository": "git@github.com:koala-live/js-bloom.git",
   "author": "Netto Farah <netto@koala.live>",
   "private": true,
