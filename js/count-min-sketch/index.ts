@@ -33,25 +33,23 @@ function seeds(k: number): number[] {
   return seeds;
 }
 
+const DEFAULTS: Partial<CountMinSketchOptions> = {
+  size: 100,
+  hashes: 4,
+};
 export class CountMinSketch {
-  static DEFAULTS: Partial<CountMinSketchOptions> = {
-    size: 100,
-    hashes: 4,
-  };
-
   private options: CountMinSketchOptions;
   private k: number;
   private m: number;
   private data: Uint32Array[];
   private seeds: number[];
 
-  constructor(
-    options: Partial<CountMinSketchOptions> = CountMinSketch.DEFAULTS
-  ) {
-    this.options = {
-      ...CountMinSketch.DEFAULTS,
-      ...options,
-    } as CountMinSketchOptions;
+  constructor(options: Partial<CountMinSketchOptions> = {}) {
+    this.options = Object.assign(
+      {},
+      DEFAULTS,
+      options
+    ) as CountMinSketchOptions;
 
     this.k = this.options.hashes;
     this.m = this.options.size;
@@ -84,11 +82,10 @@ export class CountMinSketch {
   }
 
   toHash(): object {
-    return {
-      ...this.options,
+    return Object.assign({}, this.options, {
       data: toArray(this.data),
       seeds: this.seeds,
-    };
+    });
   }
 
   toJSON(): string {
