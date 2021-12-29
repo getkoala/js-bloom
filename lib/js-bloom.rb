@@ -25,14 +25,14 @@ class JsBloom
   end
 
   def add keys
-    [keys].flatten.each do |key|
+    [keys].flat_map do |key|
       indexes_for(key).each { |index| @bits.add(index) }
     end
     nil
   end
 
   def test keys
-    [keys].flatten.each do |key|
+    [keys].flat_map do |key|
       indexes_for(key).each do |index|
         return false if @bits.get(index) == 0
       end
