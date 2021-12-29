@@ -9,24 +9,14 @@ class JsBloom
     def initialize(size, field = nil)
       @size = size
       @field = field || Array.new(((size - 1) / ELEMENT_WIDTH) + 1, 0)
-      @count = 0
     end
 
     def add(position)
-      self[position] = 1
-      @count += 1
+      @field[position / ELEMENT_WIDTH] |= 1 << (position % ELEMENT_WIDTH)
     end
 
     def remove(position)
-      self[position] = 0
-      @count -= 1
-    end
-
-    # Set a bit (1/0)
-    def []=(position, value)
-      if value == 1
-        @field[position / ELEMENT_WIDTH] |= 1 << (position % ELEMENT_WIDTH)
-      elsif (@field[position / ELEMENT_WIDTH]) & (1 << (position % ELEMENT_WIDTH)) != 0
+      if (@field[position / ELEMENT_WIDTH]) & (1 << (position % ELEMENT_WIDTH)) != 0
         @field[position / ELEMENT_WIDTH] ^= 1 << (position % ELEMENT_WIDTH)
       end
     end
