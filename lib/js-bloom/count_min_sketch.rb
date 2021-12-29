@@ -1,6 +1,9 @@
 class JsBloom
   class CountMinSketch
-    MAX_FIXNUM = 2**(0.size*8 - 2) - 1
+    # Number.MAX_SAFE_INTEGER in the browser
+    # We need this in order to safely serialize to JSON
+    MAX_FIXNUM = 9007199254740991 - 1
+
     DEFAULTS = { size: 100, hashes: 4 }
 
     attr_reader :k, :m, :data

@@ -7,7 +7,7 @@ interface CountMinSketchOptions {
   seeds?: number[];
 }
 
-const MAX_FIXNUM = 2 ** (8 * 8 - 2) - 1;
+const MAX_FIXNUM = Number.MAX_SAFE_INTEGER - 1;
 
 function createData(k: number, m: number): Uint32Array[] {
   const data = new Array(k);
