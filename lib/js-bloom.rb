@@ -3,10 +3,10 @@ require "json"
 require "zlib"
 
 class JsBloom
-  DEFAULTS = { "size" => 100, "hashes" => 4, "seed" => Time.new.to_i, "bits" => nil }
+  DEFAULTS = { size: 100, hashes: 4, seed: Time.new.to_i, bits: nil }
 
   def self.build capacity, error_rate, seed = Time.new.to_i
-    JsBloom.new :size => size_for(capacity, error_rate), :hashes => hashes_for(capacity, error_rate), :seed => seed
+    JsBloom.new size: size_for(capacity, error_rate), hashes: hashes_for(capacity, error_rate), seed: seed
   end
 
   def self.size_for capacity, error_rate
@@ -18,9 +18,9 @@ class JsBloom
   end
 
   def initialize options = {}
-    items = options.delete("items")
-    @options = merge_defaults_with options
-    @bits = BitArray.new(@options["size"], @options["bits"])
+    items = options.delete(:items)
+    @options = merge_defaults_with(options)
+    @bits = BitArray.new(@options[:size], @options[:bits])
     add(items) if items
   end
 
@@ -54,11 +54,11 @@ class JsBloom
   end
 
   def clear
-    @bits = BitArray.new(@options["size"])
+    @bits = BitArray.new(@options[:size])
   end
 
   def to_hash
-    @options.merge({ "bits" => @bits.field })
+    @options.merge({ bits: @bits.field })
   end
 
   def to_json
@@ -70,17 +70,17 @@ class JsBloom
   end
 
   def stats
-    fp = ((1.0 - Math.exp(-(@options["hashes"] * size).to_f / @options["size"])) ** @options["hashes"]) * 100
-    printf "Number of filter buckets (m): %d\n" % @options["size"]
+    fp = ((1.0 - Math.exp(-(@options[:hashes] * size).to_f / @options[:size])) ** @options[:hashes]) * 100
+    printf "Number of filter buckets (m): %d\n" % @options[:size]
     printf "Number of filter elements (n): %d\n" % size
-    printf "Number of filter hashes (k) : %d\n" % @options["hashes"]
+    printf "Number of filter hashes (k) : %d\n" % @options[:hashes]
     printf "Predicted false positive rate = %.2f%\n" % fp
   end
 
   private
 
   def indexes_for key
-    count, seed, size = @options['hashes'], @options["seed"], @options["size"]
+    count, seed, size = @options[:hashes], @options[:seed], @options[:size]
     i, out = 0, Array.new(count)
 
     while true do
@@ -93,6 +93,6 @@ class JsBloom
   end
 
   def merge_defaults_with options
-    DEFAULTS.merge Hash[options.map {|k, v| ["#{k}", v] }]
+    DEFAULTS.merge(Hash[options.map {|k, v| [k.to_sym, v] }])
   end
 end

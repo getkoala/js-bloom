@@ -4,8 +4,8 @@ describe JsBloom do
   describe ".build" do
     it "should generate a BloomFilter with the right number of hashes and size" do
       bf = JsBloom.build 1000, 0.01
-      expect(bf.to_hash["hashes"]).to be == 7
-      expect(bf.to_hash["size"]).to be == 9586
+      expect(bf.to_hash[:hashes]).to be == 7
+      expect(bf.to_hash[:size]).to be == 9586
     end
   end
 
@@ -13,9 +13,9 @@ describe JsBloom do
     it "should take the appropriate options" do
       seed = Time.now.to_i - 24*60*60
       bf = JsBloom.new :size => 200, :hashes => 10, :seed => seed
-      expect(bf.to_hash["size"]).to be == 200
-      expect(bf.to_hash["hashes"]).to be == 10
-      expect(bf.to_hash["seed"]).to be == seed
+      expect(bf.to_hash[:size]).to be == 200
+      expect(bf.to_hash[:hashes]).to be == 10
+      expect(bf.to_hash[:seed]).to be == seed
     end
 
     it "should be initializable with a field serialized by another bloom filter" do
@@ -57,9 +57,9 @@ describe JsBloom do
 
     describe "#clear" do
       it "should clear the bit array" do
-        expect(@bf.to_hash["bits"]).not_to be == [0,0,0,0]
+        expect(@bf.to_hash[:bits]).not_to be == [0,0,0,0]
         @bf.clear
-        expect(@bf.to_hash["bits"]).to be == [0,0,0,0]
+        expect(@bf.to_hash[:bits]).to be == [0,0,0,0]
       end
     end
 
@@ -68,17 +68,17 @@ describe JsBloom do
         hash = @bf.to_hash
         expect(hash).to be_a(Hash)
 
-        expect(hash).to have_key("seed")
-        expect(hash["seed"]).to be_a(Integer)
+        expect(hash).to have_key(:seed)
+        expect(hash[:seed]).to be_a(Integer)
 
-        expect(hash).to have_key("hashes")
-        expect(hash["hashes"]).to be_a(Integer)
+        expect(hash).to have_key(:hashes)
+        expect(hash[:hashes]).to be_a(Integer)
 
-        expect(hash).to have_key("size")
-        expect(hash["size"]).to be_a(Integer)
+        expect(hash).to have_key(:size)
+        expect(hash[:size]).to be_a(Integer)
 
-        expect(hash).to have_key("bits")
-        expect(hash["bits"]).to be_a(Array)
+        expect(hash).to have_key(:bits)
+        expect(hash[:bits]).to be_a(Array)
       end
     end
 
