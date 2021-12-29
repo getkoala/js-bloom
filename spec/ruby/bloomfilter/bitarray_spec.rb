@@ -22,11 +22,6 @@ describe JsBloom::BitArray do
       ba.add(9)
       expect(ba.to_s).to be == "0000000001"
     end
-
-    it "should throw an error on out of bound" do
-      ba = JsBloom::BitArray.new(10)
-      expect(lambda{ba.add(10)}).to raise_error
-    end
   end
 
   describe "#remove" do
@@ -36,11 +31,6 @@ describe JsBloom::BitArray do
       ba.remove(9)
       expect(ba.to_s).to be == "0000000000"
     end
-
-    it "should throw an error on out of bound" do
-      ba = JsBloom::BitArray.new(10)
-      expect(lambda{ba.remove(10)}).to raise_error
-    end
   end
 
   describe "#get" do
@@ -49,11 +39,6 @@ describe JsBloom::BitArray do
       ba.add(9)
       expect(ba.get(9)).to be == 1
       expect(ba.get(8)).to be == 0
-    end
-
-    it "should throw an error on out of bound" do
-      ba = JsBloom::BitArray.new(10)
-      expect(lambda{ba.get(10)}).to raise_error
     end
   end
 

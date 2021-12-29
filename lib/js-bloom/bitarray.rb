@@ -12,19 +12,18 @@ class JsBloom
       @count = 0
     end
 
-    def add position
+    def add(position)
       self[position] = 1
       @count += 1
     end
 
-    def remove position
+    def remove(position)
       self[position] = 0
       @count -= 1
     end
 
     # Set a bit (1/0)
     def []=(position, value)
-      raise ArgumentError.new("Position out of bound (#{position} for max #{@size})") if position >= @size
       if value == 1
         @field[position / ELEMENT_WIDTH] |= 1 << (position % ELEMENT_WIDTH)
       elsif (@field[position / ELEMENT_WIDTH]) & (1 << (position % ELEMENT_WIDTH)) != 0
@@ -33,8 +32,7 @@ class JsBloom
     end
 
     # Read a bit (1/0)
-    def get position
-      raise ArgumentError.new("Position out of bound (#{position} for max #{@size})") if position >= @size
+    def get(position)
       @field[position / ELEMENT_WIDTH] & 1 << (position % ELEMENT_WIDTH) > 0 ? 1 : 0
     end
 

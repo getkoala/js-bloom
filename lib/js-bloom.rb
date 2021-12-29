@@ -41,7 +41,7 @@ class JsBloom
   end
 
   def add_single key
-    indexes_for(key).each { |index| @bits.add(index) }
+    indexes_for(key).each { |i| @bits.add(i) }
     nil
   end
 
@@ -80,9 +80,16 @@ class JsBloom
   private
 
   def indexes_for key
-    @options['hashes'].times.map do |index|
-      Zlib.crc32("#{key}:#{index+@options["seed"]}") % @options["size"]
+    count, seed, size = @options['hashes'], @options["seed"], @options["size"]
+    i, out = 0, Array.new(count)
+
+    while true do
+      break if i >= count
+      out[i] = Zlib.crc32("#{key}:#{i+seed}") % size
+      i += 1
     end
+
+    out
   end
 
   def merge_defaults_with options
