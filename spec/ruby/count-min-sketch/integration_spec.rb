@@ -36,7 +36,7 @@ describe 'CountMinSketch integration' do
       JSON.parse(row[0])
     end
 
-    cms = JsBloom::CountMinSketch.new(hashes: 3, size: companies.size * 10)
+    cms = JsBloom::CountMinSketch.new(hashes: 3, size: companies.size * 15)
     company_names = companies.map { |c| c['name'] }.uniq
 
     company_names.each do |company|
@@ -67,7 +67,7 @@ describe 'CountMinSketch integration' do
     config = cms.to_json
     gzipped = Zlib::Deflate.deflate(config)
 
-    expect(config.bytesize).to be <= 61_000
-    expect(gzipped.bytesize).to be <= 2_500
+    expect(config.bytesize).to be <= 91_000
+    expect(gzipped.bytesize).to be <= 2_800
   end
 end

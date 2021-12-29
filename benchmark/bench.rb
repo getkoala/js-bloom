@@ -43,8 +43,16 @@ end
 config = bloom.to_json
 gzipped = Zlib::Deflate.deflate(config)
 
-puts "Config size: #{config.bytesize}"
-puts "Config Gzipped size: #{gzipped.bytesize}"
+puts "BloomFilter Config size: #{config.bytesize}"
+puts "BloomFilter Config Gzipped size: #{gzipped.bytesize}"
+
+puts "\n\n\n"
+
+config = cms.to_json
+gzipped = Zlib::Deflate.deflate(config)
+
+puts "CMS Config size: #{config.bytesize}"
+puts "CMS Config Gzipped size: #{gzipped.bytesize}"
 
 puts "\n\nRuby"
 bloom.stats
