@@ -18,6 +18,23 @@ declare module "count-min-sketch/index" {
     toJSON(): string;
   }
 }
+
+declare module "js-bloom/index" {
+  interface JsBloomOptions {
+    size: number;
+    hashes: number;
+    seed?: number;
+    bits?: null | number[];
+  }
+  export class JsBloom {
+    constructor(options?: Partial<JsBloomOptions>);
+    add(...item: string[]): void;
+    test(...item: string[]): boolean;
+    toHash(): object;
+    toJSON(): string;
+  }
+}
 declare module "js-bloom" {
   export { CountMinSketch } from "count-min-sketch/index";
+  export { JsBloom } from "js-bloom/index";
 }

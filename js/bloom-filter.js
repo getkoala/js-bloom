@@ -9,16 +9,12 @@ export const JsBloom = function (options = {}) {
     bits: null,
   };
 
-  const items = delete options["items"];
   for (let key in options) {
     const value = options[key];
     this.options[key] = value;
   }
 
   this.bits = new BA(this.options["size"], this.options["bits"]);
-  if (items) {
-    this.add(items);
-  }
 
   return this;
 };
