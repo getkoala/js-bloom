@@ -1,4 +1,4 @@
-import { JSBloom as JsBloom } from "../../js/index";
+import { JsBloom as JsBloom } from "../../js/index";
 
 describe("JsBloom", function () {
   describe("#initialize", function () {

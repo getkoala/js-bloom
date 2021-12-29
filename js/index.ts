@@ -1,2 +1,2 @@
-export { JSBloom } from "./bloom-filter";
+export { JsBloom } from "./bloom-filter";
 export { CountMinSketch } from "./count-min-sketch";

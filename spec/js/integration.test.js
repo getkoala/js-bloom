@@ -1,10 +1,10 @@
-import { JSBloom } from "../../js/index";
+import { JsBloom } from "../../js/index";
 import fs from "fs/promises";
 import { CountMinSketch } from "../../js/count-min-sketch";
 
 describe("Bloom Filter Integration", () => {
   it("simple", () => {
-    const simple = new JSBloom({
+    const simple = new JsBloom({
       size: 100,
       hashes: 4,
       seed: 1,
@@ -23,7 +23,7 @@ describe("Bloom Filter Integration", () => {
     ).toString();
 
     const serialized = JSON.parse(fixture);
-    const bloom = new JSBloom(serialized);
+    const bloom = new JsBloom(serialized);
 
     expect(bloom.test("matt")).toBe(true);
     expect(bloom.test("netto")).toBe(true);
@@ -41,7 +41,7 @@ describe("Bloom Filter Integration", () => {
     ).toString();
 
     const serialized = JSON.parse(fixture);
-    const bloom = new JSBloom(serialized);
+    const bloom = new JsBloom(serialized);
 
     expect(bloom.test("Segment")).toBe(true);
     expect(bloom.test("Salesforce")).toBe(true);

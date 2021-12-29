@@ -1,7 +1,7 @@
 import { BA } from "./bitarray";
 import { crc32 } from "./zlib";
 
-export const JSBloom = function (options = {}) {
+export const JsBloom = function (options = {}) {
   this.options = {
     size: 100,
     hashes: 4,
@@ -23,7 +23,7 @@ export const JSBloom = function (options = {}) {
   return this;
 };
 
-const proto = JSBloom.prototype;
+const proto = JsBloom.prototype;
 
 proto.add = function (...keys) {
   for (let key of keys) {
