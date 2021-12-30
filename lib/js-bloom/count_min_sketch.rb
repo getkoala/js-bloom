@@ -38,6 +38,26 @@ class JsBloom
       min_count
     end
 
+    def set_count(x, n)
+      existing = count(x)
+
+      if n == existing then
+        return existing
+      end
+
+      if existing == 0
+        return add(x, n)
+      end
+
+      if n > existing
+        return add(x, n - existing)
+      end
+
+      if n < existing
+        return add(x, -(existing - n))
+      end
+    end
+
     def to_hash
       @options.merge(data: @data, seeds: @seeds)
     end
