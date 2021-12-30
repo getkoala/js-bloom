@@ -14,6 +14,7 @@ declare module "count-min-sketch/index" {
     constructor(options?: Partial<CountMinSketchOptions>);
     count(item: string): number;
     add(item: string, n?: number): number;
+    setCount(intem: string, n: number): number;
     toHash(): object;
     toJSON(): string;
   }
