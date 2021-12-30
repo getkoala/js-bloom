@@ -81,6 +81,10 @@ export class CountMinSketch {
     return minCount;
   }
 
+  setCount(item: string, n: number) {
+    this.add(item, n - this.count(item));
+  }
+
   toHash(): object {
     return Object.assign({}, this.options, {
       data: toArray(this.data),

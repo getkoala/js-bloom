@@ -39,23 +39,7 @@ class JsBloom
     end
 
     def set_count(x, n)
-      existing = count(x)
-
-      if n == existing then
-        return existing
-      end
-
-      if existing == 0
-        return add(x, n)
-      end
-
-      if n > existing
-        return add(x, n - existing)
-      end
-
-      if n < existing
-        return add(x, -(existing - n))
-      end
+      add(x, n - count(x))
     end
 
     def to_hash
