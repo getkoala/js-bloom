@@ -5,3 +5,4 @@ pkg
 
 /spec/fixtures/bloom*.json
 /spec/fixtures/cms*.json
+/dist/

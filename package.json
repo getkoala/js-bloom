@@ -1,25 +1,60 @@
 {
-  "name": "js-bloom",
   "version": "0.1.0",
-  "main": "node.dist.js",
-  "module": "browser.min.js",
-  "types": "index.d.ts",
-  "repository": "git@github.com:koala-live/js-bloom.git",
-  "author": "Netto Farah <netto@koala.live>",
-  "private": true,
-  "devDependencies": {
-    "@types/jest": "^27.0.3",
-    "esbuild": "^0.14.8",
-    "jest": "^27.4.5",
-    "prettier": "^2.5.1",
-    "ts-jest": "^27.1.2",
-    "typescript": "^4.5.4"
+  "license": "MIT",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=10"
   },
   "scripts": {
-    "test": "jest"
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "tsdx test",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build",
+    "size": "size-limit",
+    "analyze": "size-limit --why"
+  },
+  "peerDependencies": {},
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
   },
   "prettier": {
-    "useTabs": false,
-    "tabWidth": 2
-  }
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "name": "js-bloom",
+  "author": "Netto Farah",
+  "module": "dist/js-bloom.esm.js",
+  "size-limit": [
+    {
+      "path": "dist/js-bloom.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/js-bloom.esm.js",
+      "limit": "10 KB"
+    }
+  ],
+  "resolutions": {
+    "typescript": "^4.5.4"
+  },
+  "devDependencies": {
+    "@size-limit/preset-small-lib": "^7.0.5",
+    "husky": "^7.0.4",
+    "size-limit": "^7.0.5",
+    "timekeeper": "^2.2.0",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.3.1",
+    "typescript": "^4.5.4"
+  },
+  "dependencies": {}
 }
