@@ -1,6 +1,6 @@
 import { crc32 } from "../zlib";
 
-interface CountMinSketchOptions {
+export interface CountMinSketchOptions {
   size: number;
   hashes: number;
   data?: number[][];

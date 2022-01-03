@@ -1,5 +1,5 @@
 declare module "count-min-sketch/index" {
-  interface CountMinSketchOptions {
+  export interface CountMinSketchOptions {
     size: number;
     hashes: number;
     data?: number[][];
@@ -21,7 +21,7 @@ declare module "count-min-sketch/index" {
 }
 
 declare module "js-bloom/index" {
-  interface JsBloomOptions {
+  export interface JsBloomOptions {
     size: number;
     hashes: number;
     seed?: number;
@@ -36,6 +36,9 @@ declare module "js-bloom/index" {
   }
 }
 declare module "js-bloom" {
-  export { CountMinSketch } from "count-min-sketch/index";
-  export { JsBloom } from "js-bloom/index";
+  export {
+    CountMinSketch,
+    CountMinSketchOptions,
+  } from "count-min-sketch/index";
+  export { JsBloom, JsBloomOptions } from "js-bloom/index";
 }
