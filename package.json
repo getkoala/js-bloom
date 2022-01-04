@@ -1,11 +1,14 @@
 {
+  "name": "@koala-live/js-bloom",
+  "author": "Netto Farah",
+  "module": "dist/js-bloom.esm.js",
+  "private": false,
   "version": "0.1.0",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "engines": {
     "node": ">=10"
@@ -17,7 +20,8 @@
     "lint": "tsdx lint",
     "prepare": "tsdx build",
     "size": "size-limit",
-    "analyze": "size-limit --why"
+    "analyze": "size-limit --why",
+    "pub": "npm publish --access=public"
   },
   "peerDependencies": {},
   "husky": {
@@ -31,9 +35,6 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "js-bloom",
-  "author": "Netto Farah",
-  "module": "dist/js-bloom.esm.js",
   "size-limit": [
     {
       "path": "dist/js-bloom.cjs.production.min.js",
