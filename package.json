@@ -18,7 +18,7 @@
     "build": "tsdx build",
     "test": "tsdx test",
     "lint": "tsdx lint",
-    "prepare": "tsdx build",
+    "prepack": "tsdx build",
     "size": "size-limit",
     "analyze": "size-limit --why",
     "pub": "npm publish --access=public"
@@ -53,10 +53,9 @@
     "husky": "^7.0.4",
     "size-limit": "^7.0.5",
     "timekeeper": "^2.2.0",
+    "tsdx": "^0.14.1",
     "tslib": "^2.3.1",
     "typescript": "^4.5.4"
   },
-  "dependencies": {
-    "tsdx": "^0.14.1"
-  }
+  "dependencies": {}
 }
