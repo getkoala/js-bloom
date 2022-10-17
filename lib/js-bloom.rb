@@ -5,6 +5,8 @@ require 'zlib'
 class JsBloom
   DEFAULTS = { size: 100, hashes: 4, seed: Time.new.to_i, bits: nil }
 
+  attr_accessor :bits
+
   def self.build(capacity, error_rate, seed = Time.new.to_i)
     JsBloom.new size: size_for(capacity, error_rate), hashes: hashes_for(capacity, error_rate), seed: seed
   end

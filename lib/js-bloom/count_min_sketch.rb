@@ -42,6 +42,17 @@ class JsBloom
       add(x, n - count(x))
     end
 
+    def merge(another)
+      merged_data = @data.each_with_index.map do |row, i|
+        another_row = another.data[i]
+        row = row.each_with_index.map do |count, j|
+          row[j] + another_row[j]
+        end
+      end
+
+      self.class.new(data: merged_data, seeds: @seeds, size: @m, hashes: @k)
+    end
+
     def to_hash
       @options.merge(data: @data, seeds: @seeds)
     end
