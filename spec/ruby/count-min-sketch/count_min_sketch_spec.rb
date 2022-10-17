@@ -2,7 +2,6 @@ require 'spec_helper'
 require 'yaml'
 
 describe JsBloom::CountMinSketch do
-
   it 'counts occurrences' do
     cms = JsBloom::CountMinSketch.new
 
