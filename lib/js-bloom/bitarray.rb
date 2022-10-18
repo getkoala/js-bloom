@@ -1,7 +1,7 @@
 class JsBloom
   class BitArray
-    attr_reader :size
-    attr_reader :field
+    attr_reader :size, :field
+
     include Enumerable
 
     ELEMENT_WIDTH = 32
@@ -27,8 +27,8 @@ class JsBloom
     end
 
     # Iterate over each bit
-    def each(&block)
-      @size.times { |position| yield self.get(position) }
+    def each
+      @size.times { |position| yield get(position) }
     end
 
     def set_bits
@@ -41,7 +41,7 @@ class JsBloom
 
     # Returns the field as a string like "0101010100111100," etc.
     def to_s
-      inject("") { |a, b| a + b.to_s }
+      inject('') { |a, b| a + b.to_s }
     end
   end
 end

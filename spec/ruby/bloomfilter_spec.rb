@@ -1,70 +1,71 @@
-require "spec_helper"
+require 'spec_helper'
 
 describe JsBloom do
-  describe ".build" do
-    it "should generate a BloomFilter with the right number of hashes and size" do
+  describe '.build' do
+    it 'should generate a BloomFilter with the right number of hashes and size' do
       bf = JsBloom.build 1000, 0.01
       expect(bf.to_hash[:hashes]).to be == 7
       expect(bf.to_hash[:size]).to be == 9586
     end
   end
 
-  describe "#initialize" do
-    it "should take the appropriate options" do
-      seed = Time.now.to_i - 24*60*60
-      bf = JsBloom.new :size => 200, :hashes => 10, :seed => seed
+  describe '#initialize' do
+    it 'should take the appropriate options' do
+      seed = Time.now.to_i - 24 * 60 * 60
+      bf = JsBloom.new size: 200, hashes: 10, seed: seed
+
       expect(bf.to_hash[:size]).to be == 200
       expect(bf.to_hash[:hashes]).to be == 10
       expect(bf.to_hash[:seed]).to be == seed
     end
 
-    it "should be initializable with a field serialized by another bloom filter" do
+    it 'should be initializable with a field serialized by another bloom filter' do
       bf1 = JsBloom.new
-      bf1.add "foo"
+      bf1.add 'foo'
       bf2 = JsBloom.new bf1.to_hash
-      expect(bf2.test "foo").to be true
+      expect(bf2.test('foo')).to be true
     end
   end
 
-  context "with an instance" do
+  context 'with an instance' do
     before :each do
       @bf = JsBloom.new
-      @bf.add("foobar")
+      @bf.add('foobar')
     end
 
-    describe "#add, #test" do
-      it "should add a key" do
-        expect(@bf.test "foo").to be false
-        @bf.add "foo"
-        expect(@bf.test "foo").to be true
+    describe '#add, #test' do
+      it 'should add a key' do
+        expect(@bf.test('foo')).to be false
+        @bf.add 'foo'
+        expect(@bf.test('foo')).to be true
       end
 
-      it "should be able to add and test more than one key at a time" do
-        expect(@bf.test "foo").to be false
-        expect(@bf.test "bar").to be false
-        @bf.add ["foo", "bar"]
-        expect(@bf.test ["foo", "bar"]).to be true
+      it 'should be able to add and test more than one key at a time' do
+        expect(@bf.test('foo')).to be false
+        expect(@bf.test('bar')).to be false
+        @bf.add %w[foo bar]
+        expect(@bf.test(%w[foo bar])).to be true
       end
 
-      it "should not change anything if added twice" do
-        expect(@bf.test "foobar").to be true
-        bits = @bf.to_hash["bits"]
-        @bf.add "foobar"
-        expect(@bf.test "foobar").to be true
-        expect(@bf.to_hash["bits"]).to be == bits
+      it 'should not change anything if added twice' do
+        expect(@bf.test('foobar')).to be true
+        bits = @bf.to_hash['bits']
+        @bf.add 'foobar'
+        expect(@bf.test('foobar')).to be true
+        expect(@bf.to_hash['bits']).to be == bits
       end
     end
 
-    describe "#clear" do
-      it "should clear the bit array" do
-        expect(@bf.to_hash[:bits]).not_to be == [0,0,0,0]
+    describe '#clear' do
+      it 'should clear the bit array' do
+        expect(@bf.to_hash[:bits]).not_to be == [0, 0, 0, 0]
         @bf.clear
-        expect(@bf.to_hash[:bits]).to be == [0,0,0,0]
+        expect(@bf.to_hash[:bits]).to be == [0, 0, 0, 0]
       end
     end
 
-    describe "#to_hash" do
-      it "should return the serialisable hash" do
+    describe '#to_hash' do
+      it 'should return the serialisable hash' do
         hash = @bf.to_hash
         expect(hash).to be_a(Hash)
 
@@ -82,8 +83,8 @@ describe JsBloom do
       end
     end
 
-    describe "#to_json" do
-      it "should return the hash serialised" do
+    describe '#to_json' do
+      it 'should return the hash serialised' do
         expect(@bf.to_json).to be == JSON.generate(@bf.to_hash)
       end
     end

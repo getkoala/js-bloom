@@ -2,7 +2,6 @@ require 'spec_helper'
 require 'yaml'
 
 describe JsBloom::CountMinSketch do
-
   it 'counts occurrences' do
     cms = JsBloom::CountMinSketch.new
 
@@ -56,5 +55,19 @@ describe JsBloom::CountMinSketch do
     cms.add('same', 25)
     cms.set_count('same', 25)
     expect(cms.count('same')).to be(25)
+  end
+
+  it 'supports merging two cms' do
+    cms = JsBloom::CountMinSketch.new(size: 10, hashes: 2, seeds: [1, 2])
+    cms.add('apple', 2)
+    expect(cms.count('apple')).to be(2)
+
+
+    another_one = JsBloom::CountMinSketch.new(size: 10, hashes: 2, seeds: [1, 2])
+    another_one.add('apple', 10)
+    expect(another_one.count('apple')).to be(10)
+
+    merged = cms.merge(another_one)
+    expect(merged.count('apple')).to be(12)
   end
 end
