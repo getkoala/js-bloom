@@ -1,5 +1,5 @@
 {
-  "name": "@koala-live/js-bloom",
+  "name": "@getkoala/js-bloom",
   "author": "Netto Farah",
   "module": "dist/js-bloom.esm.js",
   "private": false,
